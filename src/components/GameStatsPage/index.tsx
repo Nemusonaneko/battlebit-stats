@@ -19,7 +19,7 @@ export default function GameStatsPage() {
         <div className="flex flex-col justify-center items-center gap-4">
           <div className="flex flex-col justify-center items-center">
             <h1 className="font-bold text-3xl">Total Active Players:</h1>
-            <h2 className="text-2xl">
+            <h2 className="text-3xl">
               {Number(data.totalActivePlayers).toLocaleString("en-US")}
             </h2>
           </div>
@@ -41,18 +41,20 @@ export default function GameStatsPage() {
           )}
           {data.gameModeData && (
             <div className="flex flex-col justify-center items-center gap-2">
-              <h1 className="font-bold text-3xl">Game Mode:</h1>
+              <h1 className="font-bold text-3xl">Game Modes:</h1>
               <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 justify-center items-center">
-                {Object.keys(data.gameModeData).map(
-                  (mode: string, i: number) =>
-                    data.gameModeData[mode].activePlayers > 0 && (
-                      <RegionCard
-                        key={i}
-                        title={mode}
-                        players={data.gameModeData[mode].activePlayers}
-                      />
-                    )
-                )}
+                {Object.keys(data.gameModeData)
+                  .sort()
+                  .map(
+                    (mode: string, i: number) =>
+                      data.gameModeData[mode].activePlayers > 0 && (
+                        <RegionCard
+                          key={i}
+                          title={mode}
+                          players={data.gameModeData[mode].activePlayers}
+                        />
+                      )
+                  )}
               </div>
             </div>
           )}

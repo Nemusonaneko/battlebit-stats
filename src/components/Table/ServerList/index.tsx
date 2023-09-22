@@ -52,6 +52,9 @@ export default function ServerListTable<TData, TValue>({
                 })}
               </TableRow>
             ))}
+            {/* <TableRow>
+              <TableHead>Test</TableHead>
+            </TableRow> */}
           </TableHeader>
           <TableBody>
             {table.getRowModel().rows?.length ? (

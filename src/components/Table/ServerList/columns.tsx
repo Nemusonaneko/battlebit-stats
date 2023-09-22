@@ -1,10 +1,10 @@
 import { translateTitle } from "@/components/Cards/RegionCard";
 import { ColumnDef } from "@tanstack/react-table";
 
-type ServerListColumnTypes = {
+export type ServerListColumnTypes = {
   time: string;
-  gamemode: string;
-  password: boolean;
+  Gamemode: string;
+  HasPassword: boolean;
   tick: number;
   official: boolean;
   map: string;
@@ -43,7 +43,7 @@ export const serverListColumns: ColumnDef<ServerListColumnTypes>[] = [
     accessorKey: "Gamemode",
     header: "Mode",
     cell: ({ row }) => {
-      return <p>{translateTitle(row.getValue("Gamemode"))}</p>;
+      return <p>{translateTitle(row.original.Gamemode)}</p>;
     },
   },
   {
@@ -73,6 +73,14 @@ export const serverListColumns: ColumnDef<ServerListColumnTypes>[] = [
     header: "Official",
     cell: ({ row }) => {
       return <p>{`${row.getValue("IsOfficial") ? "Yes" : "No"}`}</p>;
+    },
+  },
+  {
+    id: "HasPassword",
+    accessorKey: "HasPassword",
+    header: "Password",
+    cell: ({ row }) => {
+      return <p>{row.original.HasPassword ? "Yes" : "No"}</p>;
     },
   },
   {
