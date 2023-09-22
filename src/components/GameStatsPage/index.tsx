@@ -15,7 +15,7 @@ export default function GameStatsPage({ data }: { data: any }) {
           {data.regionData && (
             <div className="flex flex-col justify-center items-center gap-2">
               <h1 className="font-bold text-3xl">Regions:</h1>
-              <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 justify-center items-center">
+              <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 justify-center items-center">
                 {Object.keys(data.regionData)
                   .sort()
                   .map((region: string, i: number) => (
