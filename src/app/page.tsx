@@ -2,14 +2,10 @@
 
 import GameStatsPage from "@/components/GameStatsPage";
 import OverallStatsPage from "@/components/OverallStatsPage";
+import ServerListPage from "@/components/ServerListPage";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import useGetPlayerStats from "@/queries/useGetPlayerStats";
-import useGetServerList from "@/queries/useGetServerList";
 
 export default function Home() {
-  const { data: playerData } = useGetPlayerStats();
-  const { data: serverData } = useGetServerList();
-  console.log(serverData);
   return (
     <main>
       <Tabs defaultValue="player">
@@ -24,12 +20,14 @@ export default function Home() {
           </div>
         </div>
         <TabsContent value="player">
-          <OverallStatsPage data={playerData} />
+          <OverallStatsPage />
         </TabsContent>
         <TabsContent value="game">
-          <GameStatsPage data={serverData} />
+          <GameStatsPage />
         </TabsContent>
-        <TabsContent value="server"></TabsContent>
+        <TabsContent value="server">
+          <ServerListPage />
+        </TabsContent>
       </Tabs>
     </main>
   );

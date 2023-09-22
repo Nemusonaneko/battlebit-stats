@@ -47,7 +47,5 @@ async function getServerList() {
 }
 
 export default function useGetServerList() {
-  return useQuery(["serverList"], () => getServerList(), {
-    refetchInterval: 5000,
-  });
+  return useQuery(["serverList"], () => getServerList());
 }

@@ -1,7 +1,18 @@
+import useGetServerList from "@/queries/useGetServerList";
 import RegionCard from "../Cards/RegionCard";
 import Loading from "../Loading";
+import { useEffect } from "react";
 
-export default function GameStatsPage({ data }: { data: any }) {
+export default function GameStatsPage() {
+  const { data, refetch } = useGetServerList();
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      refetch();
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [refetch]);
+
   return (
     <div className="p-4">
       {data ? (
@@ -32,18 +43,16 @@ export default function GameStatsPage({ data }: { data: any }) {
             <div className="flex flex-col justify-center items-center gap-2">
               <h1 className="font-bold text-3xl">Game Mode:</h1>
               <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 justify-center items-center">
-                {Object.keys(data.gameModeData)
-                  .map((mode: string, i: number) =>
-                    data.gameModeData[mode].activePlayers ? (
+                {Object.keys(data.gameModeData).map(
+                  (mode: string, i: number) =>
+                    data.gameModeData[mode].activePlayers > 0 && (
                       <RegionCard
                         key={i}
                         title={mode}
                         players={data.gameModeData[mode].activePlayers}
                       />
-                    ) : (
-                      <></>
                     )
-                  )}
+                )}
               </div>
             </div>
           )}

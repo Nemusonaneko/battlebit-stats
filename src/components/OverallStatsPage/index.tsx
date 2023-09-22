@@ -14,13 +14,17 @@ import {
   xpColumns,
 } from "../Table/OverallData/columns";
 import OverallDataTableCard from "../Cards/OverallDataTableCard";
+import useGetPlayerStats from "@/queries/useGetPlayerStats";
 
-export default function OverallStatsPage({ data }: { data: any }) {
+export default function OverallStatsPage() {
+  const { data } = useGetPlayerStats();
   return (
     <div className="p-4">
       {data ? (
         <div className="flex flex-col gap-4">
-          <h1 className="font-bold text-xl">{`Tracking ${Number(data.playerNames.length).toLocaleString("en-US")} players`}</h1>
+          <h1 className="font-bold text-xl">{`Tracking ${Number(
+            data.playerNames.length
+          ).toLocaleString("en-US")} players`}</h1>
           <div className="grid gap-4 grid-cols-1 lg:grid-cols-2">
             {data.overall["MostKills"] && (
               <OverallDataTableCard

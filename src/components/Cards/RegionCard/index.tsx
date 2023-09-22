@@ -19,10 +19,10 @@ const translations: { [key: string]: string } = {
   FRONTLINE: "Frontline",
   RUSH: "Rush",
   CaptureTheFlag: "Capture The Flag",
-  ELI: "Elimination"
+  ELI: "Elimination",
 };
 
-function translateTitle(title: string) {
+export function translateTitle(title: string) {
   return translations[title] ?? title;
 }
 
