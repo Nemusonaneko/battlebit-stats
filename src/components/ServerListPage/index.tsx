@@ -3,16 +3,23 @@ import Loading from "../Loading";
 import ServerListTable from "../Table/ServerList";
 import { serverListColumns } from "../Table/ServerList/columns";
 import { Card, CardContent, CardTitle } from "../ui/card";
+import { Button } from "../ui/button";
 
 export default function ServerListPage() {
-  const { data } = useGetServerList();
+  const { data, refetch } = useGetServerList();
 
   return (
     <div className="p-4">
       {data ? (
         <Card>
-          <CardTitle className="p-4">
-            Server List
+          <CardTitle className="p-4 flex items-center gap-2">
+            <h4 className="font-bold text-2xl">Server List</h4>
+            <Button
+              className="text-xs hover:bg-gray-500"
+              onClick={() => refetch()}
+            >
+              Refresh
+            </Button>
           </CardTitle>
           <CardContent>
             <ServerListTable data={data.data} columns={serverListColumns} />
