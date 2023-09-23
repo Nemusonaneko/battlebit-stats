@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   Table,
   TableRow,
@@ -9,11 +10,14 @@ import {
 } from "@/components/ui/table";
 import {
   ColumnDef,
+  ColumnFiltersState,
   flexRender,
   getCoreRowModel,
+  getFilteredRowModel,
   getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import { useState } from "react";
 
 export interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -24,11 +28,17 @@ export default function ServerListTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    onColumnFiltersChange: setColumnFilters,
+    getFilteredRowModel: getFilteredRowModel(),
+    state: {
+      columnFilters,
+    },
   });
 
   return (
@@ -40,21 +50,39 @@ export default function ServerListTable<TData, TValue>({
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
+                    <TableHead key={header.id} className="p-1">
+                      <div className="flex items-center justify-center">
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(
+                              header.column.columnDef.header,
+                              header.getContext()
+                            )}
+                      </div>
+                      {(header.id === "Map" ||
+                        header.id === "Name" ||
+                        header.id === "Gamemode") && (
+                        <div className="p-1">
+                          <Input
+                            placeholder={`Search ${header.column.columnDef.header}`}
+                            value={
+                              table
+                                .getColumn(header.id)
+                                ?.getFilterValue() as string
+                            }
+                            onChange={(event) =>
+                              table
+                                .getColumn(header.id)
+                                ?.setFilterValue(event.target.value)
+                            }
+                          />
+                        </div>
+                      )}
                     </TableHead>
                   );
                 })}
               </TableRow>
             ))}
-            {/* <TableRow>
-              <TableHead>Test</TableHead>
-            </TableRow> */}
           </TableHeader>
           <TableBody>
             {table.getRowModel().rows?.length ? (
@@ -64,7 +92,7 @@ export default function ServerListTable<TData, TValue>({
                   data-state={row.getIsSelected() && "selected"}
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
+                    <TableCell key={cell.id} className="text-center">
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()

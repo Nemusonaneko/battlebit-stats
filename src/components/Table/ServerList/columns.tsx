@@ -29,12 +29,12 @@ function translateSize(size: number) {
 
 export const serverListColumns: ColumnDef<ServerListColumnTypes>[] = [
   {
-    id: "map",
+    id: "Map",
     accessorKey: "Map",
     header: "Map",
   },
   {
-    id: "name",
+    id: "Name",
     accessorKey: "Name",
     header: "Name",
   },
@@ -47,7 +47,7 @@ export const serverListColumns: ColumnDef<ServerListColumnTypes>[] = [
     },
   },
   {
-    id: "size",
+    id: "MaxPlayers",
     accessorKey: "MaxPlayers",
     header: "Size",
     cell: ({ row }) => {
@@ -63,7 +63,7 @@ export const serverListColumns: ColumnDef<ServerListColumnTypes>[] = [
     },
   },
   {
-    id: "tick",
+    id: "Hz",
     accessorKey: "Hz",
     header: "Tickrate",
   },
