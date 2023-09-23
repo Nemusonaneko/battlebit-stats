@@ -12,7 +12,7 @@ export type ServerListColumnTypes = {
   name: string;
   Players: number;
   QueuePlayers: number;
-  region: string;
+  Region: string;
 };
 
 const sizeTranslate: { [key: number]: string } = {
@@ -41,6 +41,7 @@ export const serverListColumns: ColumnDef<ServerListColumnTypes>[] = [
   {
     id: "Gamemode",
     accessorKey: "Gamemode",
+    accessorFn: (row) => translateTitle(row.Gamemode),
     header: "Mode",
     cell: ({ row }) => {
       return <p>{translateTitle(row.original.Gamemode)}</p>;
@@ -58,8 +59,9 @@ export const serverListColumns: ColumnDef<ServerListColumnTypes>[] = [
     id: "Region",
     accessorKey: "Region",
     header: "Region",
+    accessorFn: (row) => translateTitle(row.Region),
     cell: ({ row }) => {
-      return <p>{translateTitle(row.getValue("Region"))}</p>;
+      return <p>{translateTitle(row.original.Region)}</p>;
     },
   },
   {
