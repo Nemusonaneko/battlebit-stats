@@ -61,7 +61,8 @@ export default function ServerListTable<TData, TValue>({
                       </div>
                       {(header.id === "Map" ||
                         header.id === "Name" ||
-                        header.id === "Gamemode") && (
+                        header.id === "Gamemode" ||
+                        header.id === "Region") && (
                         <div className="p-1">
                           <Input
                             placeholder={`Search ${header.column.columnDef.header}`}
