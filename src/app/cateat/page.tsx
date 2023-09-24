@@ -40,11 +40,32 @@ export default function CatEatLeaderboard() {
     return final;
   }, [data]);
 
+  const catEatRankAndXP = useMemo(() => {
+    if (!data?.overall) {
+      return {
+        rank: 0,
+        xp: 0,
+        players: 0,
+      };
+    }
+
+    const filtered = data.overall["TopClans"].filter(
+      (x: any) => x.Clan === "catEat"
+    )[0];
+    console.log(filtered);
+    return {
+      rank: filtered.rank,
+      players: filtered.MaxPlayers,
+      xp: filtered.XP,
+    };
+  }, [data]);
+
   return (
     <div className="p-4 flex flex-col gap-4">
       <div className="flex gap-2 items-baseline">
         <Image src={catEat} alt="catEat" />
         <h1 className="font-bold text-4xl">catEat</h1>
+        <p>{`Rank: ${catEatRankAndXP.rank} XP: ${catEatRankAndXP.xp} Members: ${catEatRankAndXP.players}`}</p>
       </div>
       <div>
         {sortedData ? (
