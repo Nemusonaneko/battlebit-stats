@@ -65,7 +65,11 @@ export default function CatEatLeaderboard() {
       <div className="flex gap-2 items-baseline">
         <Image src={catEat} alt="catEat" />
         <h1 className="font-bold text-4xl">catEat</h1>
-        <p>{`Rank: ${catEatRankAndXP.rank} XP: ${catEatRankAndXP.xp} Members: ${catEatRankAndXP.players}`}</p>
+        <p>{`Rank: ${catEatRankAndXP.rank} XP: ${Number(
+          catEatRankAndXP.xp
+        ).toLocaleString("en-US")} Members: ${Number(
+          catEatRankAndXP.players
+        ).toLocaleString("en-US")}`}</p>
       </div>
       <div>
         {sortedData ? (
