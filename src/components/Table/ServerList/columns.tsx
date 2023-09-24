@@ -27,6 +27,23 @@ function translateSize(size: number) {
   return sizeTranslate[size] ?? size;
 }
 
+const arrowUpDown = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth={1.5}
+    stroke="currentColor"
+    className="w-4 h-4"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M3 7.5L7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5"
+    />
+  </svg>
+);
+
 export const serverListColumns: ColumnDef<ServerListColumnTypes>[] = [
   {
     id: "Map",
@@ -87,8 +104,19 @@ export const serverListColumns: ColumnDef<ServerListColumnTypes>[] = [
   },
   {
     id: "players",
-    accessorKey: "players",
-    header: "Players",
+    accessorKey: "Players",
+    header: ({ column }) => {
+      return (
+        <button
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          <div className="flex gap-1 items-center">
+            <p>Players</p>
+            {arrowUpDown}
+          </div>
+        </button>
+      );
+    },
     cell: ({ row }) => {
       return (
         <p>{`${row.original.Players}${
