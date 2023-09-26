@@ -5,7 +5,7 @@ const API_ROUTE = process.env.NEXT_PUBLIC_API || "http://localhost:3000";
 async function getPlayerStats() {
   try {
     const response = await fetch(`${API_ROUTE}/api/bbplayerstats`, {
-      cache: "no-store",
+      cache: "no-cache",
       method: "GET",
       headers: {
         "Content-Type": "application/json",

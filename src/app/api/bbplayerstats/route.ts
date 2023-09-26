@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 const publicApi: string = "https://publicapi.battlebit.cloud/Leaderboard/Get";
 
 export async function GET() {
-  const response = await fetch(publicApi, { cache: "no-store" });
+  const response = await fetch(publicApi, { cache: "no-cache" });
   if (!response.ok)
     return NextResponse.json({
       status: 500,
