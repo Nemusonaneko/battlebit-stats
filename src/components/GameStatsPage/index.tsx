@@ -5,16 +5,19 @@ import { useEffect, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 
 export default function GameStatsPage() {
+<<<<<<< HEAD
   const { data, refetch } = useGetServerList();
   const [currData, setCurrData] = useState<any>(null);
+=======
+  const { data } = useGetServerList();
+>>>>>>> parent of f4a7ef7 (refetch?)
   const queryClient = useQueryClient();
   useEffect(() => {
     const interval = setInterval(() => {
       queryClient.invalidateQueries();
-      refetch();
     }, 1000);
     return () => clearInterval(interval);
-  }, [queryClient, refetch]);
+  }, [queryClient]);
 
   useEffect(() => {
     setCurrData(data);

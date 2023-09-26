@@ -8,8 +8,12 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 
 export default function ServerListPage() {
+<<<<<<< HEAD
   const { data, refetch } = useGetServerList();
   const [currData, setCurrData] = useState<any>(null);
+=======
+  const { data } = useGetServerList();
+>>>>>>> parent of f4a7ef7 (refetch?)
   const queryClient = useQueryClient();
 
   useEffect(() => {
@@ -24,10 +28,7 @@ export default function ServerListPage() {
             <h4 className="font-bold text-2xl">Server List</h4>
             <Button
               className="text-xs hover:bg-gray-500"
-              onClick={() => {
-                queryClient.invalidateQueries();
-                refetch();
-              }}
+              onClick={() => queryClient.invalidateQueries()}
             >
               Refresh
             </Button>
