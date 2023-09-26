@@ -4,9 +4,11 @@ import ServerListTable from "../Table/ServerList";
 import { serverListColumns } from "../Table/ServerList/columns";
 import { Card, CardContent, CardTitle } from "../ui/card";
 import { Button } from "../ui/button";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function ServerListPage() {
-  const { data, refetch } = useGetServerList();
+  const { data } = useGetServerList();
+  const queryClient = useQueryClient();
 
   return (
     <div className="p-4">
@@ -16,7 +18,7 @@ export default function ServerListPage() {
             <h4 className="font-bold text-2xl">Server List</h4>
             <Button
               className="text-xs hover:bg-gray-500"
-              onClick={() => refetch()}
+              onClick={() => queryClient.invalidateQueries()}
             >
               Refresh
             </Button>

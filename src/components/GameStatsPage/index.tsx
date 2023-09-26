@@ -2,16 +2,17 @@ import useGetServerList from "@/queries/useGetServerList";
 import RegionCard from "../Cards/RegionCard";
 import Loading from "../Loading";
 import { useEffect } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function GameStatsPage() {
-  const { data, refetch } = useGetServerList();
-
+  const { data } = useGetServerList();
+  const queryClient = useQueryClient();
   useEffect(() => {
     const interval = setInterval(() => {
-      refetch();
+      queryClient.invalidateQueries();
     }, 1000);
     return () => clearInterval(interval);
-  }, [refetch]);
+  }, [queryClient]);
 
   return (
     <div className="p-4">
