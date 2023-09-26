@@ -5,7 +5,7 @@ const API_ROUTE = process.env.NEXT_PUBLIC_API || "http://localhost:3000";
 async function getServerList() {
   try {
     const response = await fetch(`${API_ROUTE}/api/bbserverlist`, {
-      method: "GET",
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },

@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 const publicApi: string =
   "https://publicapi.battlebit.cloud/Servers/GetServerList";
 
-export async function GET() {
+export async function POST() {
   const response = await fetch(publicApi, {
     method: "GET",
     headers: {
