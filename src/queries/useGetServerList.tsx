@@ -5,11 +5,11 @@ const API_ROUTE = process.env.NEXT_PUBLIC_API || "http://localhost:3000";
 async function getServerList() {
   try {
     const response = await fetch(`${API_ROUTE}/api/bbserverlist`, {
-      cache: "no-cache",
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
+      cache: "no-store",
     });
 
     if (!response.ok) throw new Error("Failed API call");
@@ -48,5 +48,7 @@ async function getServerList() {
 }
 
 export default function useGetServerList() {
-  return useQuery(["serverList"], () => getServerList());
+  return useQuery(["serverList"], () => getServerList(), {
+    staleTime: 0,
+  });
 }

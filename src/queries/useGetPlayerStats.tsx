@@ -5,11 +5,11 @@ const API_ROUTE = process.env.NEXT_PUBLIC_API || "http://localhost:3000";
 async function getPlayerStats() {
   try {
     const response = await fetch(`${API_ROUTE}/api/bbplayerstats`, {
-      cache: "no-cache",
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
+      cache: "no-store",
     });
 
     if (!response.ok) throw new Error("Failed API call");
@@ -49,5 +49,7 @@ async function getPlayerStats() {
 }
 
 export default function useGetPlayerStats() {
-  return useQuery(["playerStats"], () => getPlayerStats());
+  return useQuery(["playerStats"], () => getPlayerStats(), {
+    staleTime: 0,
+  });
 }

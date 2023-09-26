@@ -4,7 +4,13 @@ const publicApi: string =
   "https://publicapi.battlebit.cloud/Servers/GetServerList";
 
 export async function GET() {
-  const response = await fetch(publicApi, {cache: "no-cache"});
+  const response = await fetch(publicApi, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    cache: "no-store",
+  });
   if (!response.ok)
     return NextResponse.json({
       status: 500,
@@ -15,4 +21,3 @@ export async function GET() {
 
   return NextResponse.json({ status: 200, response: result });
 }
-
