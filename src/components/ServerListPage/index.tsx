@@ -7,7 +7,7 @@ import { Button } from "../ui/button";
 import { useQueryClient } from "@tanstack/react-query";
 
 export default function ServerListPage() {
-  const { data } = useGetServerList();
+  const { data, refetch } = useGetServerList();
   const queryClient = useQueryClient();
 
   return (
@@ -18,7 +18,10 @@ export default function ServerListPage() {
             <h4 className="font-bold text-2xl">Server List</h4>
             <Button
               className="text-xs hover:bg-gray-500"
-              onClick={() => queryClient.invalidateQueries()}
+              onClick={() => {
+                queryClient.invalidateQueries();
+                refetch();
+              }}
             >
               Refresh
             </Button>

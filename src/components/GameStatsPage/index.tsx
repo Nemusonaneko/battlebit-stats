@@ -5,14 +5,15 @@ import { useEffect } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 
 export default function GameStatsPage() {
-  const { data } = useGetServerList();
+  const { data, refetch } = useGetServerList();
   const queryClient = useQueryClient();
   useEffect(() => {
     const interval = setInterval(() => {
       queryClient.invalidateQueries();
+      refetch();
     }, 1000);
     return () => clearInterval(interval);
-  }, [queryClient]);
+  }, [queryClient, refetch]);
 
   return (
     <div className="p-4">
