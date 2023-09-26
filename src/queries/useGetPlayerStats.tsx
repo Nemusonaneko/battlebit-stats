@@ -4,13 +4,16 @@ const API_ROUTE = process.env.NEXT_PUBLIC_API || "http://localhost:3000";
 
 async function getPlayerStats() {
   try {
-    const response = await fetch(`${API_ROUTE}/api/bbplayerstats`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      cache: "no-store",
-    });
+    const response = await fetch(
+      `https://publicapi.battlebit.cloud/Leaderboard/Get`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        cache: "no-store",
+      }
+    );
 
     if (!response.ok) throw new Error("Failed API call");
 

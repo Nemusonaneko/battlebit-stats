@@ -4,7 +4,7 @@ const API_ROUTE = process.env.NEXT_PUBLIC_API || "http://localhost:3000";
 
 async function getServerList() {
   try {
-    const response = await fetch(`${API_ROUTE}/api/bbserverlist`, {
+    const response = await fetch(`https://publicapi.battlebit.cloud/Servers/GetServerList`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
