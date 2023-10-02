@@ -44,7 +44,9 @@ export default function OverallDataTable<TData, TValue>({
   });
 
   const searchParams =
-    columns === clanColumns || clanSortedByXpColumns ? "Clan" : "name";
+    columns === clanColumns || columns === clanSortedByXpColumns
+      ? "Clan"
+      : "name";
 
   return (
     <div className="flex flex-col gap-1 border p-2">
