@@ -5,6 +5,9 @@ const rankColumn = {
   id: "rank",
   accessorKey: "rank",
   header: "Rank",
+  cell: ({ row }: { row: any }) => {
+    return <p>{row.index}</p>;
+  },
 };
 
 const nameColumn = {
@@ -168,12 +171,36 @@ export const clanColumns: ColumnDef<any>[] = [
     },
   },
   {
+    id: "MaxPlayers",
+    accessorKey: "MaxPlayers",
+    header: "Members",
+    cell: ({ row }) => {
+      return (
+        <p>{Number(row.getValue("MaxPlayers")).toLocaleString("en-US")}</p>
+      );
+    },
+  },
+  {
     id: "XP",
     accessorKey: "XP",
     header: "XP",
     cell: ({ row }) => {
       return (
         <p>{`${Number(row.getValue("XP")).toLocaleString("en-US")} XP`}</p>
+      );
+    },
+  },
+  {
+    id: "XP",
+    accessorKey: "XP",
+    header: "XP/Member",
+    cell: ({ row }) => {
+      return (
+        <p>{`${Number(
+          Number(
+            Number(row.getValue("XP")) / Number(row.getValue("MaxPlayers"))
+          ).toFixed(0)
+        ).toLocaleString("en-US")} XP`}</p>
       );
     },
   },

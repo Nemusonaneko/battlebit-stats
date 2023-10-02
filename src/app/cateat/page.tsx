@@ -52,7 +52,6 @@ export default function CatEatLeaderboard() {
     const filtered = data.overall["TopClans"].filter(
       (x: any) => x.Clan === "catEat"
     )[0];
-    console.log(filtered);
     return {
       rank: filtered.rank,
       players: filtered.MaxPlayers,
@@ -70,6 +69,11 @@ export default function CatEatLeaderboard() {
         ).toLocaleString("en-US")} Members: ${Number(
           catEatRankAndXP.players
         ).toLocaleString("en-US")}`}</p>
+        <p>
+          {`XP Per Member: ${Number(
+            Number(catEatRankAndXP.xp / catEatRankAndXP.players).toFixed(0)
+          ).toLocaleString("en-US")} XP`}
+        </p>
       </div>
       <div>
         {sortedData ? (

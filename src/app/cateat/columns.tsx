@@ -11,6 +11,9 @@ const catEatColumn = {
   id: "catEatRank",
   accessorKey: "catEatRank",
   header: "Rank",
+  cell: ({ row }: { row: any }) => {
+    return <p>{row.index}</p>;
+  },
 };
 
 const nameColumn = {
@@ -165,36 +168,3 @@ export const xpColumns: ColumnDef<any>[] = [
   },
 ];
 
-export const clanColumns: ColumnDef<any>[] = [
-  catEatColumn,
-  rankColumn,
-  {
-    id: "Tag",
-    accessorKey: "Tag",
-  },
-  {
-    id: "Clan",
-    accessorKey: "Clan",
-    header: "Clan",
-    cell: ({ row }) => {
-      return (
-        <Link
-          href={`/player/${encodeURIComponent(String(row.getValue("Clan")))}`}
-          target="_blank"
-        >
-          <p>{`${row.getValue("Clan")}`}</p>
-        </Link>
-      );
-    },
-  },
-  {
-    id: "XP",
-    accessorKey: "XP",
-    header: "XP",
-    cell: ({ row }) => {
-      return (
-        <p>{`${Number(row.getValue("XP")).toLocaleString("en-US")} XP`}</p>
-      );
-    },
-  },
-];
