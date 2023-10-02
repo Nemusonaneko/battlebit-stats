@@ -6,7 +6,7 @@ const rankColumn = {
   accessorKey: "rank",
   header: "Rank",
   cell: ({ row }: { row: any }) => {
-    return <p>{row.index}</p>;
+    return <p>{row.index + 1}</p>;
   },
 };
 
@@ -191,7 +191,64 @@ export const clanColumns: ColumnDef<any>[] = [
     },
   },
   {
+    id: "MemberXP",
+    accessorKey: "XP",
+    header: "XP/Member",
+    cell: ({ row }) => {
+      return (
+        <p>{`${Number(
+          Number(
+            Number(row.getValue("XP")) / Number(row.getValue("MaxPlayers"))
+          ).toFixed(0)
+        ).toLocaleString("en-US")} XP`}</p>
+      );
+    },
+  },
+];
+
+export const clanSortedByXpColumns: ColumnDef<any>[] = [
+  rankColumn,
+  {
+    id: "Tag",
+    accessorKey: "Tag",
+  },
+  {
+    id: "Clan",
+    accessorKey: "Clan",
+    header: "Clan",
+    cell: ({ row }) => {
+      return (
+        <Link
+          href={`/player/${encodeURIComponent(String(row.getValue("Clan")))}`}
+          target="_blank"
+        >
+          <p>{`${row.getValue("Clan")}`}</p>
+        </Link>
+      );
+    },
+  },
+  {
+    id: "MaxPlayers",
+    accessorKey: "MaxPlayers",
+    header: "Members",
+    cell: ({ row }) => {
+      return (
+        <p>{Number(row.getValue("MaxPlayers")).toLocaleString("en-US")}</p>
+      );
+    },
+  },
+  {
     id: "XP",
+    accessorKey: "XP",
+    header: "XP",
+    cell: ({ row }) => {
+      return (
+        <p>{`${Number(row.getValue("XP")).toLocaleString("en-US")} XP`}</p>
+      );
+    },
+  },
+  {
+    id: "MemberXP",
     accessorKey: "XP",
     header: "XP/Member",
     cell: ({ row }) => {

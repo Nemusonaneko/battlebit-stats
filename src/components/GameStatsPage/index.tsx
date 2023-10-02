@@ -30,9 +30,9 @@ export default function GameStatsPage() {
               <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 justify-center items-center">
                 {Object.keys(data.regionData)
                   .sort()
-                  .map((region: string, i: number) => (
+                  .map((region: string) => (
                     <RegionCard
-                      key={i}
+                      key={region}
                       title={region}
                       players={data.regionData[region].activePlayers}
                     />
@@ -47,10 +47,10 @@ export default function GameStatsPage() {
                 {Object.keys(data.gameModeData)
                   .sort()
                   .map(
-                    (mode: string, i: number) =>
+                    (mode: string) =>
                       data.gameModeData[mode].activePlayers > 0 && (
                         <RegionCard
-                          key={i}
+                          key={mode}
                           title={mode}
                           players={data.gameModeData[mode].activePlayers}
                         />

@@ -38,6 +38,23 @@ async function getPlayerStats() {
       });
       overall[key] = newValues;
     });
+
+    const TopClans: any = Object.values(
+      data.filter((x: any) => Object.keys(x)[0] === "TopClans")[0]
+    )[0];
+
+    const TopClansSortedByXp = TopClans.sort(
+      (a: any, b: any) => Number(b.XP) - Number(a.XP)
+    );
+
+    let newTopClansSortedByXp: any[] = [];
+    let clanRankSortedByXp = 1;
+    TopClansSortedByXp.forEach((clan: any) => {
+      newTopClansSortedByXp.push({ ...clan, rank: clanRankSortedByXp });
+      clanRankSortedByXp++;
+    });
+    overall["TopClansSortedByXp"] = newTopClansSortedByXp;
+
     return {
       playerNames: playerNames,
       overall,

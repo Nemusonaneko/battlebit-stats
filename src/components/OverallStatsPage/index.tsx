@@ -3,6 +3,7 @@
 import Loading from "../Loading";
 import {
   clanColumns,
+  clanSortedByXpColumns,
   healColumns,
   killColumns,
   longestKillColumns,
@@ -40,9 +41,16 @@ export default function OverallStatsPage() {
                 data={data.overall["MostXP"]}
               />
             )}
+            {data.overall["TopClansSortedByXp"] && (
+              <OverallDataTableCard
+                title="Clans Sorted by XP"
+                columns={clanSortedByXpColumns}
+                data={data.overall["TopClansSortedByXp"]}
+              />
+            )}
             {data.overall["TopClans"] && (
               <OverallDataTableCard
-                title="Clans"
+                title="Clans Sorted by XP/Member"
                 columns={clanColumns}
                 data={data.overall["TopClans"]}
               />

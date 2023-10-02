@@ -12,7 +12,7 @@ const catEatColumn = {
   accessorKey: "catEatRank",
   header: "Rank",
   cell: ({ row }: { row: any }) => {
-    return <p>{row.index}</p>;
+    return <p>{row.index + 1}</p>;
   },
 };
 
