@@ -26,13 +26,6 @@ export default function Page({ params }: { params: { id: string } }) {
               : playerData.name
           }`}</h2>
           <div className="grid gap-2 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
-            {playerData["TopClans"] && (
-              <PlayerCard
-                title="Clans"
-                data={playerData["TopClans"]}
-                label="XP"
-              />
-            )}
             {playerData["MostKills"] && (
               <PlayerCard
                 title="Kills"

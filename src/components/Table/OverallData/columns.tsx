@@ -160,14 +160,7 @@ export const clanColumns: ColumnDef<any>[] = [
     accessorKey: "Clan",
     header: "Clan",
     cell: ({ row }) => {
-      return (
-        <Link
-          href={`/player/${encodeURIComponent(String(row.getValue("Clan")))}`}
-          target="_blank"
-        >
-          <p>{`${row.getValue("Clan")}`}</p>
-        </Link>
-      );
+      return <p>{`${row.getValue("Clan")}`}</p>;
     },
   },
   {
@@ -217,14 +210,7 @@ export const clanSortedByXpColumns: ColumnDef<any>[] = [
     accessorKey: "Clan",
     header: "Clan",
     cell: ({ row }) => {
-      return (
-        <Link
-          href={`/player/${encodeURIComponent(String(row.getValue("Clan")))}`}
-          target="_blank"
-        >
-          <p>{`${row.getValue("Clan")}`}</p>
-        </Link>
-      );
+      return <p>{`${row.getValue("Clan")}`}</p>;
     },
   },
   {
