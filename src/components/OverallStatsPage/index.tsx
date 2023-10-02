@@ -55,11 +55,11 @@ export default function OverallStatsPage() {
                 data={data.overall["TopClans"]}
               />
             )}
-            {data.overall["MostLongestKill"] && (
+            {data.overall["MostRevives"] && (
               <OverallDataTableCard
-                title="Longest Kill"
-                columns={longestKillColumns}
-                data={data.overall["MostLongestKill"]}
+                title="Revives"
+                columns={revivesColumns}
+                data={data.overall["MostRevives"]}
               />
             )}
             {data.overall["MostHeals"] && (
@@ -69,11 +69,11 @@ export default function OverallStatsPage() {
                 data={data.overall["MostHeals"]}
               />
             )}
-            {data.overall["MostRevives"] && (
+            {data.overall["MostLongestKill"] && (
               <OverallDataTableCard
-                title="Revives"
-                columns={revivesColumns}
-                data={data.overall["MostRevives"]}
+                title="Longest Kill"
+                columns={longestKillColumns}
+                data={data.overall["MostLongestKill"]}
               />
             )}
             {data.overall["MostObjectivesComplete"] && (
