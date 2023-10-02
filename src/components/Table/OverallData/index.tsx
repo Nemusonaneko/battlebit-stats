@@ -18,7 +18,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { useState } from "react";
-import { clanColumns } from "./columns";
+import { clanColumns, clanSortedByXpColumns } from "./columns";
 
 export interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -43,7 +43,8 @@ export default function OverallDataTable<TData, TValue>({
     },
   });
 
-  const searchParams = columns === clanColumns ? "Clan" : "name";
+  const searchParams =
+    columns === clanColumns || clanSortedByXpColumns ? "Clan" : "name";
 
   return (
     <div className="flex flex-col gap-1 border p-2">

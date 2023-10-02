@@ -52,7 +52,12 @@ export default function CatEatLeaderboard() {
     const filtered = data.overall["TopClans"].filter(
       (x: any) => x.Clan === "catEat"
     )[0];
+
+    const totalXpRank = data.overall["TopClansSortedByXp"].filter(
+      (x: any) => x.Clan === "catEat"
+    )[0]?.rank;
     return {
+      totalXpRank,
       rank: filtered.rank,
       players: filtered.MaxPlayers,
       xp: filtered.XP,
@@ -64,11 +69,11 @@ export default function CatEatLeaderboard() {
       <div className="flex gap-2 items-baseline">
         <Image src={catEat} alt="catEat" />
         <h1 className="font-bold text-4xl">catEat</h1>
-        <p>{`Rank: ${catEatRankAndXP.rank} XP: ${Number(
-          catEatRankAndXP.xp
-        ).toLocaleString("en-US")} Members: ${Number(
-          catEatRankAndXP.players
-        ).toLocaleString("en-US")}`}</p>
+      </div>
+      <div>
+        <p>{`Rank sorted by Total XP: #${catEatRankAndXP.totalXpRank}`}</p>
+        <p>{`Rank sorted by XP/Member: #${catEatRankAndXP.rank}`}</p>
+        {`Total XP: ${Number(catEatRankAndXP.xp).toLocaleString("en-US")} XP`}
         <p>
           {`XP Per Member: ${Number(
             Number(catEatRankAndXP.xp / catEatRankAndXP.players).toFixed(0)
