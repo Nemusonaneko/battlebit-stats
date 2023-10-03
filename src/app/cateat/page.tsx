@@ -23,7 +23,7 @@ export default function CatEatLeaderboard() {
   const { data } = useGetPlayerStats();
 
   const sortedData = useMemo(() => {
-    if (!data?.overall) return {};
+    if (!data?.overall) return null;
     const ogData = data.overall;
     let final: any = {};
     Object.keys(ogData).forEach((key: string) => {
@@ -71,87 +71,95 @@ export default function CatEatLeaderboard() {
         <h1 className="font-bold text-4xl">catEat</h1>
       </div>
       <div>
-        <p>{`Rank sorted by Total XP: #${catEatRankAndXP.totalXpRank}`}</p>
-        <p>{`Rank sorted by XP/Member: #${catEatRankAndXP.rank}`}</p>
-        {`Total XP: ${Number(catEatRankAndXP.xp).toLocaleString("en-US")} XP`}
-        <p>
-          {`XP Per Member: ${Number(
-            Number(catEatRankAndXP.xp / catEatRankAndXP.players).toFixed(0)
-          ).toLocaleString("en-US")} XP`}
-        </p>
-      </div>
-      <div>
         {sortedData ? (
-          <div className="grid gap-4 grid-cols-1 lg:grid-cols-2">
-            {sortedData["MostKills"] && sortedData["MostKills"].length > 0 && (
-              <OverallDataTableCard
-                title="Kills"
-                columns={killColumns}
-                data={sortedData["MostKills"]}
-              />
-            )}
-            {sortedData["MostXP"] && sortedData["MostXP"].length > 0 && (
-              <OverallDataTableCard
-                title="XP"
-                columns={xpColumns}
-                data={sortedData["MostXP"]}
-              />
-            )}
-            {sortedData["MostLongestKill"] &&
-              sortedData["MostLongestKill"].length > 0 && (
+          <div className="flex flex-col gap-2">
+            <div>
+              <p>{`Rank sorted by Total XP: #${catEatRankAndXP.totalXpRank}`}</p>
+              <p>{`Rank sorted by XP/Member: #${catEatRankAndXP.rank}`}</p>
+              {`Total XP: ${Number(catEatRankAndXP.xp).toLocaleString(
+                "en-US"
+              )} XP`}
+              <p>
+                {`XP Per Member: ${Number(
+                  Number(catEatRankAndXP.xp / catEatRankAndXP.players).toFixed(
+                    0
+                  )
+                ).toLocaleString("en-US")} XP`}
+              </p>
+            </div>
+            <div className="grid gap-4 grid-cols-1 lg:grid-cols-2">
+              {sortedData["MostKills"] &&
+                sortedData["MostKills"].length > 0 && (
+                  <OverallDataTableCard
+                    title="Kills"
+                    columns={killColumns}
+                    data={sortedData["MostKills"]}
+                  />
+                )}
+              {sortedData["MostXP"] && sortedData["MostXP"].length > 0 && (
                 <OverallDataTableCard
-                  title="Longest Kill"
-                  columns={longestKillColumns}
-                  data={sortedData["MostLongestKill"]}
+                  title="XP"
+                  columns={xpColumns}
+                  data={sortedData["MostXP"]}
                 />
               )}
-            {sortedData["MostHeals"] && sortedData["MostHeals"].length > 0 && (
-              <OverallDataTableCard
-                title="Heals"
-                columns={healColumns}
-                data={sortedData["MostHeals"]}
-              />
-            )}
-            {sortedData["MostRevives"] &&
-              sortedData["MostRevives"].length > 0 && (
-                <OverallDataTableCard
-                  title="Revives"
-                  columns={revivesColumns}
-                  data={sortedData["MostRevives"]}
-                />
-              )}
-            {sortedData["MostObjectivesComplete"] &&
-              sortedData["MostObjectivesComplete"].length > 0 && (
-                <OverallDataTableCard
-                  title="Objectives"
-                  columns={objectivesCompleteColumns}
-                  data={sortedData["MostObjectivesComplete"]}
-                />
-              )}
-            {sortedData["MostRoadkills"] &&
-              sortedData["MostRoadkills"].length > 0 && (
-                <OverallDataTableCard
-                  title="Roadkills"
-                  columns={roadkillColumns}
-                  data={sortedData["MostRoadkills"]}
-                />
-              )}
-            {sortedData["MostVehiclesDestroyed"] &&
-              sortedData["MostVehiclesDestroyed"].length > 0 && (
-                <OverallDataTableCard
-                  title="Vehicles Destroyed"
-                  columns={vehiclesDestroyedColumns}
-                  data={sortedData["MostVehiclesDestroyed"]}
-                />
-              )}
-            {sortedData["MostVehicleRepairs"] &&
-              sortedData["MostVehicleRepairs"].length > 0 && (
-                <OverallDataTableCard
-                  title="Vehicle Repairs"
-                  columns={vehicleRepairsColumns}
-                  data={sortedData["MostVehicleRepairs"]}
-                />
-              )}
+              {sortedData["MostLongestKill"] &&
+                sortedData["MostLongestKill"].length > 0 && (
+                  <OverallDataTableCard
+                    title="Longest Kill"
+                    columns={longestKillColumns}
+                    data={sortedData["MostLongestKill"]}
+                  />
+                )}
+              {sortedData["MostHeals"] &&
+                sortedData["MostHeals"].length > 0 && (
+                  <OverallDataTableCard
+                    title="Heals"
+                    columns={healColumns}
+                    data={sortedData["MostHeals"]}
+                  />
+                )}
+              {sortedData["MostRevives"] &&
+                sortedData["MostRevives"].length > 0 && (
+                  <OverallDataTableCard
+                    title="Revives"
+                    columns={revivesColumns}
+                    data={sortedData["MostRevives"]}
+                  />
+                )}
+              {sortedData["MostObjectivesComplete"] &&
+                sortedData["MostObjectivesComplete"].length > 0 && (
+                  <OverallDataTableCard
+                    title="Objectives"
+                    columns={objectivesCompleteColumns}
+                    data={sortedData["MostObjectivesComplete"]}
+                  />
+                )}
+              {sortedData["MostRoadkills"] &&
+                sortedData["MostRoadkills"].length > 0 && (
+                  <OverallDataTableCard
+                    title="Roadkills"
+                    columns={roadkillColumns}
+                    data={sortedData["MostRoadkills"]}
+                  />
+                )}
+              {sortedData["MostVehiclesDestroyed"] &&
+                sortedData["MostVehiclesDestroyed"].length > 0 && (
+                  <OverallDataTableCard
+                    title="Vehicles Destroyed"
+                    columns={vehiclesDestroyedColumns}
+                    data={sortedData["MostVehiclesDestroyed"]}
+                  />
+                )}
+              {sortedData["MostVehicleRepairs"] &&
+                sortedData["MostVehicleRepairs"].length > 0 && (
+                  <OverallDataTableCard
+                    title="Vehicle Repairs"
+                    columns={vehicleRepairsColumns}
+                    data={sortedData["MostVehicleRepairs"]}
+                  />
+                )}
+            </div>
           </div>
         ) : (
           <Loading />
